@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+    //Problem
+    //1a. Using React, display a button on the website with the text "Good job!" inside the button. 
+    const container = document.querySelector('.js-container');
+
+    const div = (
+        <div>
+            <button>Good job!</button>
+        </div>
+    );
+    ReactDOM.createRoot(container).render(div);
+</script>
+</body>
+</html>
