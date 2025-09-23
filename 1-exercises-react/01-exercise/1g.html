@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+    //Problem
+    //We're going to load the DayJS external library on the website (DayJS is an external library that helps us to work with dates easier).
+    // To load DayJS, create a <script> above your code, and load the URL: https://unpkg.com/supersimpledev/dayjs.js
+    //After DayJS is loaded, use the code:dayjs().format('MMMM D') to get the current date. Display this result in the console.
+    const currentDate = dayjs().format('MMMM D');
+    console.log(currentDate);
+</script>
+</body>
+</html>

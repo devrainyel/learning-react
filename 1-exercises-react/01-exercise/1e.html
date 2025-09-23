@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+    //Problem
+    //1e. Continuing from 1d, insert the productCost variable into a paragraph element, create the design below, and display it on the website
+    const productCost = 10 + 8 * 2;
+    console.log(productCost);
+
+    const paragraph =  <p>Product cost: ${productCost}</p>
+    
+
+    ReactDOM.createRoot(document.querySelector('.js-container')).render(paragraph);
+</script>
+</body>
+</html>
