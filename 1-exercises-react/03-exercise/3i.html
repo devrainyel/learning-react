@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+    //3i. Instead of clicking the "Send" button, we can also send a message by pressing "Enter"
+    //on our keyboard. We'll add this feature to the project.
+    //-Add a new event prop onKeyDown to the <input>. This runs a
+    //function each time we press a key on our keyboard
+    //-The function gets an event parameter, and we can get the key that
+    //was pressed using event.key
+    //-If event.key is 'Enter', send the message
+
+
+        function  ChatInput( { chatMessages, setChatMessages } ) {
+           const [inputText, setInputText] = React.useState('');
+
+            function saveInputText(event) {
+                setInputText(event.target.value);
+            }
+
+            function sendMessage() {
+                const newChatMessages = [
+                    ...chatMessages,
+                    {
+                        message: inputText,
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ];
+
+                setChatMessages(newChatMessages);
+
+                const response = Chatbot.getResponse(inputText);
+                setChatMessages([
+                    ...newChatMessages, //copy of newChatMessages
+                    {
+                        message: response,
+                        sender: 'bot',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+
+                setInputText(''); // Controlled Input
+            }
+
+            function OnKeyDown() {
+                if(event.key === 'Enter'){
+                    sendMessage();
+                }
+            }
+                //Controlled input by putting inputText as value
+            return (
+                <>
+                    <input 
+                        placeholder="Send a message to Chatbot" 
+                        size="30" 
+                        onChange={saveInputText}
+                        value={inputText}
+                        onKeyDown={OnKeyDown}
+                    />
+                    <button 
+                        onClick={sendMessage}
+                    >Send</button>
+                </>
+            );
+        }
+
+        function ChatMessage({ message, sender }) {
+            // const { message, sender } = props;
+            return (
+                <div>
+                    {
+                    sender === 'bot' &&  (
+                        <i className="fa-solid fa-robot fa-3x" style={{ color: 'green' }}></i>
+                    )}
+                    {message}
+                    {sender === 'user' && (
+                        <i className="fa-solid fa-circle-user fa-3x" style={{ color: 'green' }}></i>
+                    )}
+                </div>
+            );
+        }
+
+        function ChatMessages( {chatMessages} ) {
+            
+
+            return (
+                <>
+                    {chatMessages.map((chatMessage) => {
+                    return (
+                        <ChatMessage 
+                            message={chatMessage.message}
+                            sender={chatMessage.sender}
+                            key={chatMessage.id}
+                        />
+                    )
+                    })}
+                </>
+            )
+        }
+
+        function App() {
+            //more destructured
+            const [chatMessages, setChatMessages] =  React.useState([{
+                message: "hey",
+                sender: "user",
+                id: 'id1'
+            }, {
+                message: "Hey there! How can I help you?",
+                sender: "bot",
+                id: 'id2'
+            }, {
+                message: "can you get me todays date?",
+                sender: "user",
+                id: 'id3'
+            }, {
+                message: "Today is September 27",
+                sender: "bot",
+                id: 'id4'
+            }]);
+           // const chatMessages = array[0]; current state
+            //const setChatMessages = array[1]; function to update state
+           // const [chatMessages, setChatMessages] = array; shorthand
+
+            return (
+                <>
+                    <ChatInput 
+                        chatMessages={chatMessages}
+                        setChatMessages={setChatMessages}
+                    />
+                    <ChatMessages 
+                        chatMessages={chatMessages}
+                    />
+                </>
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>
