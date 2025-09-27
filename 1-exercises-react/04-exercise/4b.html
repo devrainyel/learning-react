@@ -23,8 +23,9 @@
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
 
     <script type="text/babel">
-    //Create the button on the right using React and CSS. Use the background color: 
-    // rgb(25, 135, 84);
+    //4b. Using React.useState(), save a boolean isButtonOn. This will switch between true
+    //and false when clicking the button. Using isButtonOn and the Ternary Operator (?:),
+    //switch the text between "ON" and "OFF" when clicking the button.
     function App() {
       const [isButtonOn, setButton] = React.useState(true);
 
@@ -48,4 +49,5 @@
     root.render(<App />);
 </script>
 </body>
+
 </html>
