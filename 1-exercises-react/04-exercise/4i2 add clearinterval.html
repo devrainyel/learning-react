@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Exercises</title>
+    <style>
+          body {
+               margin-top: 0px;
+               margin-bottom: 0px;
+          }
+
+          button {
+               background-color: rgb(25, 135, 84);
+               color: #FFFFFF;
+               padding: 20px;
+               border: none;
+               margin-right: 5px;
+               cursor: pointer;
+               border-radius: 10px;
+               border: 1px solid black;
+          }
+
+          div {
+               display: flex;
+               justify-content: center;
+               height: 100vh;
+               background-color: rgb(222,222,222);
+               align-items: center;
+          }
+    </style>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script type="text/babel">
+    //4i. Style the counter using this design:
+    //-Background-color: rgb(25, 135, 84)
+    //-To center the buttons horizontally, put the buttons in a flexbox and use justify-content: center;
+    //-To center the buttons vertically, first, make the flexbox the same height as the browser
+    //(use height: 100vh)
+    //-Add the background-color: rgb(222, 222, 222); to the flexbox. Notice the default margin
+    //8px around the <body> element. Remove this default margin from the top and bottom.
+    // Now that the flexbox is the same height as the browser, center the elements
+    //vertically using align-items: center;
+
+    function App() {
+    
+    const [count, setCount] = React.useState(0);
+    const buttonRef = React.useRef();
+    const intervalRef = React.useRef(null);
+
+    function increaseCount() {
+          setCount(count + 1);
+    }
+
+    function resetCount() {
+          setCount(0);
+
+          clearInterval(intervalRef.current);
+    }
+
+
+     //shorthand for
+     // setCount(function(prevCount) {
+     // return prevCount + 1;
+     // });    
+     //     function autoClick() {
+     //           setInterval(() => {
+     //                setCount(prevCount => prevCount + 1);
+     //           }, 1000)
+     //     }
+
+     function autoClick() {
+          const buttonElem = buttonRef.current;
+
+          intervalRef.current = setInterval(() => {
+          if(buttonElem){
+               buttonElem.click();
+          }
+          }, 1000)
+          
+     }
+         
+
+     return (
+          <div>
+               <button 
+                    onClick={increaseCount} 
+                    ref={buttonRef}
+               >Clicked {count} times
+               </button>
+               <button 
+                    onClick={resetCount}
+               >Reset
+               </button>
+               <button 
+                    onClick={autoClick}
+               >Auto Click</button>
+          </div>
+     )
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>
+</body>
+</html>
