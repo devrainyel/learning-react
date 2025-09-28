@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Exercises</title>
+    <style>
+          button {
+               padding: 20px;
+               border: none;
+               margin-right: 5px;
+               cursor: pointer;
+               border-radius: 10px;
+               border: 1px solid black;
+          }
+    </style>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+    <script type="text/babel">
+    //4h. Create the counter app below (you can use the code for exercise 3c)
+    //as a starting point or start from an empty React website).
+    //Note: do not put the counter in a separate component for now.
+    //Create a "Reset" button that resets the count to 0.
+    //Create an "Auto Click" button. When clicked, your code will click the counter
+    //every second (use setInterval). To click a button with code, first save the button
+    //element in your JavaScript (use useRef).
+    //Once you have the button element, run buttonElem.click().
+
+    //Normally, you can just update the count directly using State, instead of clicking the button 
+    //with code. This is just to practice useRef)
+
+    function App() {
+    
+    const [count, setCount] = React.useState(0);
+    const buttonRef = React.useRef();
+
+    function increaseCount() {
+          setCount(count + 1);
+    }
+
+    function resetCount() {
+          setCount(0);
+    }
+
+
+     //shorthand for
+     // setCount(function(prevCount) {
+     // return prevCount + 1;
+     // });    
+     //     function autoClick() {
+     //           setInterval(() => {
+     //                setCount(prevCount => prevCount + 1);
+     //           }, 1000)
+     //     }
+
+     function autoClick() {
+          const buttonElem = buttonRef.current;
+
+          setInterval(() => {
+          if(buttonElem){
+               buttonElem.click();
+          }
+          }, 1000)
+          
+     }
+         
+
+     return (
+          <>
+               <button 
+                    onClick={increaseCount} 
+                    ref={buttonRef}
+               >Clicked {count} times
+               </button>
+               <button 
+                    onClick={resetCount}
+               >Reset
+               </button>
+               <button 
+                    onClick={autoClick}
+               >Auto Click</button>
+          </>
+     )
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>
+</body>
+</html>
