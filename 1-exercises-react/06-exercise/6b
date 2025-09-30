@@ -1,0 +1,7 @@
+6b. When there are multiple components for a page, we usually group them together into a folder
+-Inside the pages folder, create a folder named checkout, and move all components and CSS related to the checkout page into this folder
+-Update all your imports (for example in APp.jsx) and test the website
+
+
+
+https://github.com/devrainyel/ecommerce-react-project/commit/f02829a9baee3e4948219eefc7a238b90564729d#diff-e667c6c9e11761387ce710428e692e635d7a849fe120eccfe80a0d68e68c842c
