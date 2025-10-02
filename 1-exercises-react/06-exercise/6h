@@ -1,0 +1,9 @@
+We'll move the tracking page to react (open the website, go to the orders page, adn click a "Track package" button.
+-Move  over the HTML (remember to reuse the <Header> component).
+-Download supersimple.dev/images/tracking-favicon.png and use it as the favicon.
+-Move over the CSS, rename it to match the Component, and import. 
+-Create a route for the tracking page in App.js (use path="tracking")
+-Open the website and test out the tracking page
+
+My commit:
+https://github.com/devrainyel/ecommerce-react-project/commit/17718f69bfaff43abd7eef03d8918926f2841977
